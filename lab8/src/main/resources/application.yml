@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: lab8_app
+
+cbr:
+  url:
+    currencyCodes: "https://cbr.ru/scripts/XML_daily_eng.asp"
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 100
+        permittedNumberOfCallsInHalfOpenState: 10
+        slowCallDurationThreshold: 4s
+        slowCallRateThreshold: 90
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        minimumNumberOfCalls: 10
+    instances:
+      myCircuitBreaker:
+        baseConfig: default
+        waitDurationInOpenState: 20s
+      myCircuitBreaker2:
+        baseConfig: default
+        waitDurationInOpenState: 30s
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
